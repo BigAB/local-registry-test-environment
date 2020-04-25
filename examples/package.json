@@ -10,6 +10,6 @@
     "@bigab/local-registry-test-environment": "^0.4.0",
     "jest": "25.4.0",
     "mkdirp": "^1.0.4",
-    "rimraf": "^3.0.2",
+    "rimraf": "^3.0.2"
   }
 }

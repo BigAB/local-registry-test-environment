@@ -36,6 +36,7 @@ describe('Testing a subpackage', () => {
     });
   });
 
+  // clean up temp project when it is over
   afterAll(async () => {
     await rmrf('./tmp');
   });
@@ -43,21 +44,27 @@ describe('Testing a subpackage', () => {
   test('install subpackage and use it with npx locally', async () => {
     const expected = 'Hello from subpackage\n';
 
+    // install the subpackage module into the temp folder
     await asyncExec(`yarn add @bigab/subpackage`, {
       cwd: tempProjectPath,
     });
 
+    // use npx to use the CLI subpackage command available after install
     const stdio = await asyncExec(`npx subpackage`, {
       cwd: tempProjectPath,
     });
     const actual = stdio.stdout.toString();
 
+    // assert the CLI ouotput was correct
+    // You could also check if files were created or whatever
     expect(actual).toBe(expected);
   });
 
   test('use directly from registry with npx', async () => {
     const expected = 'Hello from subpackage\n';
 
+    // this should use npx to install a temporary subpackage
+    // module and immediately invoke it, then check the output
     const stdio = await asyncExec(`npx @bigab/subpackage`);
     const actual = stdio.stdout.toString();
 

@@ -1,7 +1,7 @@
 {
   "name": "@bigab/subpackage",
   "version": "0.0.1",
-  "description": "",
+  "description": "This would be like if you had a monorepo with many CLI commands",
   "main": "src/index.js",
   "bin": {
     "subpackage": "src/bin/index.js"
