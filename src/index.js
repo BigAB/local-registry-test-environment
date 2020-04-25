@@ -1,32 +1,10 @@
-import NodeEnvironment from 'jest-environment-node';
-import getPort from 'get-port';
-import { LoggerLevel } from '@verdaccio/types';
-// @ts-ignore
-import startServer from 'verdaccio';
-import tmp from 'tmp-promise';
+const NodeEnvironment = require('jest-environment-node');
+const getPort = require('get-port');
+const startServer = require('verdaccio');
+const tmp = require('tmp-promise');
 
-interface Adder {
-  proto: string;
-  host: string;
-  port: string | number;
-  path: string;
-}
-
-interface RegistryServer {
-  listen: (
-    portOrPath: string | number,
-    host: string,
-    callback: (error?: Error) => void
-  ) => void;
-  close: () => void;
-}
-
-export class LocalRegistryTestEnvironment extends NodeEnvironment {
-  logLevel: LoggerLevel;
-  port: string | number;
-  dir?: tmp.DirectoryResult;
-
-  constructor(config: any, { docblockPragmas }: { docblockPragmas: any }) {
+class LocalRegistryTestEnvironment extends NodeEnvironment {
+  constructor(config, { docblockPragmas }) {
     super(config);
     const { logLevel = 'error', port } = docblockPragmas;
     this.logLevel = logLevel;
@@ -50,18 +28,15 @@ export class LocalRegistryTestEnvironment extends NodeEnvironment {
     // kill the local registry
     this.global.localRegistry.close();
     // delete the local registry store
-    this.dir?.cleanup();
+    this.dir.cleanup();
     await super.teardown();
   }
 
-  async spawnLocalRegistry(): Promise<{
-    addrs: Adder;
-    registryServer: RegistryServer;
-  }> {
+  async spawnLocalRegistry() {
     return new Promise((resolve, reject) => {
       startServer(
         {
-          storage: this.dir?.path,
+          storage: this.dir.path,
           uplinks: {
             npmjs: {
               url: 'https://registry.npmjs.org/',
@@ -97,8 +72,8 @@ export class LocalRegistryTestEnvironment extends NodeEnvironment {
         'local-registry/storage',
         '4.0.0',
         'Local Registry Test Env',
-        (webServer: RegistryServer, addrs: Adder) => {
-          webServer.listen(addrs.port || addrs.path, addrs.host, error => {
+        (webServer, addrs) => {
+          webServer.listen(addrs.port || addrs.path, addrs.host, (error) => {
             if (error) {
               reject(error);
             }
@@ -113,4 +88,4 @@ export class LocalRegistryTestEnvironment extends NodeEnvironment {
   }
 }
 
-export default LocalRegistryTestEnvironment;
+module.exports = LocalRegistryTestEnvironment;
