@@ -1,6 +1,6 @@
 const NodeEnvironment = require('jest-environment-node');
 const getPort = require('get-port');
-const startServer = require('verdaccio');
+const startServer = require('verdaccio').default;
 const tmp = require('tmp-promise');
 
 class LocalRegistryTestEnvironment extends NodeEnvironment {
@@ -18,7 +18,7 @@ class LocalRegistryTestEnvironment extends NodeEnvironment {
       addrs: { proto, host, port },
       registryServer,
     } = await this.spawnLocalRegistry();
-    this.global.localRegistry = registryServer;
+    this.localRegistry = registryServer;
     const registryUrl = `${proto}://${host}:${port}`;
     this.global.process.env.npm_config_registry = registryUrl;
     process.env.npm_config_registry = registryUrl;
@@ -26,7 +26,9 @@ class LocalRegistryTestEnvironment extends NodeEnvironment {
 
   async teardown() {
     // kill the local registry
-    this.global.localRegistry.close();
+    if (this.localRegistry) {
+      this.localRegistry.close();
+    }
     // delete the local registry store
     this.dir.cleanup();
     await super.teardown();
