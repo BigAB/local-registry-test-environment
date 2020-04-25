@@ -5,6 +5,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/local-registry-test-environment.esm.js",
+  "description": "A Jest Test Environment that runs with a local-registry for CLI testing",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",

@@ -1,27 +1,11 @@
-# TSDX Bootstrap
+# Local Registry Test Environment
 
-This project was bootstrapped with [TSDX](https://github.com/jaredpalmer/tsdx).
+A Jest Test Environment that runs with a local-registry for CLI testings
 
-## Local Development
+## Jest Development
 
-Below is a list of commands you will probably find useful.
+This library can be imported and configured as a jest test enviroment.
 
-### `npm start` or `yarn start`
+It will start a verdaccio local registry for each test file on a "random" port (using `get-port` package). It will store any published packages to a random temp directory (uses `tmp-promise` package) and will set the `processs.env.npm_config_registry` to the url of the local registry.
 
-Runs the project in development/watch mode. Your project will be rebuilt upon changes. TSDX has a special logger for you convenience. Error messages are pretty printed and formatted for compatibility VS Code's Problems tab.
-
-<img src="https://user-images.githubusercontent.com/4060187/52168303-574d3a00-26f6-11e9-9f3b-71dbec9ebfcb.gif" width="600" />
-
-Your library will be rebuilt if you make edits.
-
-### `npm run build` or `yarn build`
-
-Bundles the package to the `dist` folder.
-The package is optimized and bundled with Rollup into multiple formats (CommonJS, UMD, and ES Module).
-
-<img src="https://user-images.githubusercontent.com/4060187/52168322-a98e5b00-26f6-11e9-8cf6-222d716b75ef.gif" width="600" />
-
-### `npm test` or `yarn test`
-
-Runs the test watcher (Jest) in an interactive mode.
-By default, runs tests related to files changed since the last commit.
+This is useful for running node CLI test, where you expect the users to use `npx` or npm-scripts to run your cli commands.
