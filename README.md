@@ -15,13 +15,17 @@ This is useful for running node CLI test, where you expect the users to use `npx
 ## Install
 
 Either:
+
 ```
 yarn add -D @bigab/local-registry-test-environment
 ```
+
 or
+
 ```
 npm i -D @bigab/local-registry-test-environment
 ```
+
 Then you can just add `@big/local-registry-test-environmen` to your `devDependencies` and add this docblock to the top of any test file that requires the local registry:
 
 ```js
@@ -30,7 +34,8 @@ Then you can just add `@big/local-registry-test-environmen` to your `devDependen
  */
 ```
 
-You can even configure the test environment a bit from here by adding pragmas.  Need more logging, change the logLevel like this:
+You can even configure the test environment a bit from here by adding pragmas. Need more logging, change the logLevel like this:
+
 ```js
 /**
  * @jest-environment @bigab/local-registry-test-environment
@@ -39,6 +44,7 @@ You can even configure the test environment a bit from here by adding pragmas.  
 ```
 
 Alternatively you can set **all** your tests to use this local registry test environment by configuring jest:
+
 ```json
 {
   "jest": {
@@ -46,3 +52,7 @@ Alternatively you can set **all** your tests to use this local registry test env
   }
 }
 ```
+
+## Examples
+
+You can see some light examples of testing your node CLI package in the [Examples Directory](./examples)
