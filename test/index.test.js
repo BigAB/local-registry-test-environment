@@ -1,6 +1,7 @@
-import LocalRegistryTestEnvironment from '../src';
+const LocalRegistryTestEnvironment = require('../src');
 
 // TODO: add tests and fix types
+
 describe('Sanity test', () => {
   it('works', () => {
     const projectConfig = {};

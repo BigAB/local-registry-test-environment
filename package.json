@@ -3,29 +3,37 @@
   "name": "@bigab/local-registry-test-environment",
   "author": "Adam L Barrett",
   "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/local-registry-test-environment.esm.js",
+  "main": "src/index.js",
   "description": "A Jest Test Environment that runs with a local-registry for CLI testing",
-  "typings": "dist/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "src",
+    "README.md",
+    "LICENSE"
   ],
   "engines": {
     "node": ">=10"
   },
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "tsdx test",
-    "test:watch": "tsdx test --watch",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build"
+    "start": "jest --watch",
+    "test": "jest",
+    "lint": "eslint . --fix"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
+  "dependencies": {
+    "get-port": "^5.1.1",
+    "jest-environment-node": "^25.4.0",
+    "tmp-promise": "^2.0.2",
+    "verdaccio": "^4.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-promise": "^4.2.1",
+    "husky": "^4.2.5",
+    "jest": "^25.4.0",
+    "prettier": "^2.0.5"
   },
   "prettier": {
     "printWidth": 80,
@@ -33,17 +41,9 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "devDependencies": {
-    "husky": "^4.2.5",
-    "tsdx": "^0.13.2",
-    "tslib": "^1.11.1",
-    "typescript": "^3.8.3"
-  },
-  "dependencies": {
-    "@verdaccio/types": "^9.3.0",
-    "get-port": "^5.1.1",
-    "jest-environment-node": "^25.4.0",
-    "tmp-promise": "^2.0.2",
-    "verdaccio": "^4.6.0"
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   }
 }
