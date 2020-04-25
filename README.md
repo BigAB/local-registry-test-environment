@@ -12,7 +12,17 @@ It will start a verdaccio local registry for each test file on a "random" port (
 
 This is useful for running node CLI test, where you expect the users to use `npx` or npm-scripts to run your cli commands.
 
-You can just add `@big/local-registry-test-environmen` to your `devDependencies` and add this docblock to the top of any test file that requires the local registry:
+## Install
+
+Either:
+```
+yarn add -D @bigab/local-registry-test-environment
+```
+or
+```
+npm i -D @bigab/local-registry-test-environment
+```
+Then you can just add `@big/local-registry-test-environmen` to your `devDependencies` and add this docblock to the top of any test file that requires the local registry:
 
 ```js
 /**
