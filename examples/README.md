@@ -1,7 +1,3 @@
-# Local Registry Spike
+# Example CLI Package using local-registry-test-environment
 
-Just testing out how to use a Verdaccio local registry to run CLI tests
-
-![CircleCI Status](https://circleci.com/gh/BigAB/local-registry-spike.svg?style=svg)
-
-This is a spike, to see if I can create a test that publishes a package to the Verdaccio local registry, then use that package with an npx command, then delte the registry.
+Just pretend this is a package that had a default CLI command and a `subpackage` CLI command, and I usse the local registry to see how they work when you run `npx @big/example`
