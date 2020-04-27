@@ -10,7 +10,7 @@ class LocalRegistryTestEnvironment extends NodeEnvironment {
     this.logLevel = logLevel;
     this.port = port || process.env.LOCAL_REGISTRY_TEST_ENV_PORT;
     this.cache =
-      cache !== 'false' ||
+      cache !== 'false' &&
       process.env.LOCAL_REGISTRY_TEST_ENV_CACHE !== 'false';
   }
   async setup() {
