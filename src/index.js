@@ -6,13 +6,16 @@ const tmp = require('tmp-promise');
 class LocalRegistryTestEnvironment extends NodeEnvironment {
   constructor(config, { docblockPragmas }) {
     super(config);
-    const { logLevel = 'error', port } = docblockPragmas;
+    const { logLevel = 'error', port, cache } = docblockPragmas;
     this.logLevel = logLevel;
-    this.port = port;
+    this.port = port || process.env.LOCAL_REGISTRY_TEST_ENV_PORT;
+    this.cache =
+      cache !== 'false' ||
+      process.env.LOCAL_REGISTRY_TEST_ENV_CACHE !== 'false';
   }
   async setup() {
     await super.setup();
-    this.port = await getPort();
+    this.port = this.port || (await getPort());
     this.dir = await tmp.dir({ unsafeCleanup: true });
     const {
       addrs: { proto, host, port },
@@ -42,7 +45,7 @@ class LocalRegistryTestEnvironment extends NodeEnvironment {
           uplinks: {
             npmjs: {
               url: 'https://registry.npmjs.org/',
-              cache: false,
+              cache: this.cache,
             },
           },
           packages: {
