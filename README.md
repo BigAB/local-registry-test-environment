@@ -1,6 +1,6 @@
 # Local Registry Test Environment
 
-![CI](https://github.com/BigAB/local-registry-test-environment/workflows/CI/badge.svg)
+[![CI](https://github.com/BigAB/local-registry-test-environment/workflows/CI/badge.svg)](https://github.com/BigAB/local-registry-test-environment/actions)
 
 A Jest Test Environment that runs with a local-registry for CLI testings
 
